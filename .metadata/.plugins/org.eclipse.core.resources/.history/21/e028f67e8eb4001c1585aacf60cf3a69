@@ -1,0 +1,80 @@
+/*
+ * IIC_User.c
+ *
+ *  Created on: 2022年4月5日
+ *      Author: 19080
+ */
+#include "IIC_User.h"
+#include "gpio.h"
+#define SDA_High() HAL_GPIO_WritePin(IIC_SDA_GPIO_Port, IIC_SDA_Pin, GPIO_PIN_SET)
+#define SDA_Low() HAL_GPIO_WritePin(IIC_SDA_GPIO_Port, IIC_SDA_Pin, GPIO_PIN_RESET)
+#define SCL_High() HAL_GPIO_WritePin(IIC_SCL_GPIO_Port, IIC_SCL_Pin, GPIO_PIN_SET)
+#define SCL_Low() HAL_GPIO_WritePin(IIC_SCL_GPIO_Port, IIC_SCL_Pin, GPIO_PIN_RESET)
+void IIC_Start()
+{ SDA_High();
+  HAL_Delay(1);
+  SCL_High();
+  SDA_Low();
+  HAL_Delay(1);
+}
+
+void IIC_Stop()
+{SDA_Low();
+ SCL_High();
+ HAL_Delay(1);
+ SDA_High();
+ HAL_Delay(1);
+}
+
+void IIC_Ack()
+{SDA_Low();
+ SCL_Low();
+ SCL_High();
+ HAL_Delay(1);
+ }
+
+void IIC_NAck()
+{  SDA_High();
+   SCL_Low();
+   SCL_High();
+   HAL_Delay(1);
+
+}
+
+void IIC_SendByte(unsigned char byt)
+{
+    unsigned char i;
+
+    for(i=0; i<8; i++)
+    {
+        SCL_Low();
+        HAL_Delay(1);
+        if(byt & 0x80)
+        	SDA_High();
+        else
+        	SDA_Low();
+        HAL_Delay(1);
+        SCL_High();
+        byt <<= 1;				//从最高位开始传输数据
+        HAL_Delay(1);
+    }
+    SCL_Low();
+}
+
+void IIC_WaitAck(void)
+{
+
+	unsigned char ackbit;
+	SDA_High();				//新加，释放数据总线
+	HAL_Delay(1);
+    SCL_High();
+    HAL_Delay(1);
+    ackbit = HAL_GPIO_ReadPin(IIC_SDA_GPIO_Port, IIC_SDA_Pin);
+	if(ackbit)				//新加，若无应答，则停止总线
+		IIC_Stop();
+    SCL_Low();
+    HAL_Delay(1);
+
+
+}
+

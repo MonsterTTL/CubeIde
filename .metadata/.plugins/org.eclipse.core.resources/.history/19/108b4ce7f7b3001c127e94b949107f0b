@@ -1,0 +1,13 @@
+/*
+ * IIC_LED.h
+ *
+ *  Created on: Apr 4, 2022
+ *      Author: 19080
+ */
+
+#ifndef INC_IIC_LED_H_
+#define INC_IIC_LED_H_
+void OLED_Init();
+
+
+#endif /* INC_IIC_LED_H_ */

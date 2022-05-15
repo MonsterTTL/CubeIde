@@ -1,0 +1,18 @@
+/*
+ * IIC_User.c
+ *
+ *  Created on: 2022Äê4ÔÂ5ÈÕ
+ *      Author: 19080
+ */
+#include "IIC_User.h"
+#include "gpio.h"
+#define SDA_High() HAL_GPIO_WritePin(IIC_SDA_GPIO_Port, IIC_SDA_Pin, GPIO_PIN_SET)
+#define SDA_Low() HAL_GPIO_WritePin(IIC_SDA_GPIO_Port, IIC_SDA_Pin, GPIO_PIN_RESET)
+#define SCL_High() HAL_GPIO_WritePin(IIC_SCL_GPIO_Port, IIC_SCL_Pin, GPIO_PIN_SET)
+#define SCL_Low() HAL_GPIO_WritePin(IIC_SCL_GPIO_Port, IIC_SCL_Pin, GPIO_PIN_RESET)
+void IIC_Start()
+{
+
+
+
+}

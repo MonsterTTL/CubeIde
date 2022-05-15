@@ -1,0 +1,21 @@
+17:41:48 **** Build of configuration Debug for project F103C8T6_Master_Collect ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:107:5: error: 'hal_gpio' undeclared (first use in this function)
+  107 |     hal_gpio
+      |     ^~~~~~~~
+../Core/Src/main.c:107:5: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:107:13: error: expected ';' before '}' token
+  107 |     hal_gpio
+      |             ^
+      |             ;
+......
+  111 |   }
+      |   ~          
+../Core/Src/main.c: In function 'Key_scan':
+../Core/Src/main.c:62:1: warning: control reaches end of non-void function [-Wreturn-type]
+   62 | }
+      | ^
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
